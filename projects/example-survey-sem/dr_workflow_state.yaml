@@ -1,0 +1,44 @@
+workflow: dr
+state_version: 2
+project_name: "example-survey-sem"
+workflow_track: "sem"
+research_question: ""
+
+# Stage map:
+#   A: pattern_extract.R written and run locally -> pattern/dataset_pattern.csv (user-reviewed)
+#   B: scripts/synthesize_data.R written by the agent
+#   C: user runs it locally -> data_synthetic/synthetic_dataset.csv
+#   D1: analysis_plan.yaml            (dr-01)
+#   D2: scripts/desc.R                (dr-02)
+#   D3: scripts/infer.R crude         (dr-03)  | sem track: scripts/sem_measurement.R (dr-sem-01)
+#   D4: scripts/infer.R adjusted      (dr-04)  | sem track: scripts/sem_structural.R  (dr-sem-02)
+#   E: user runs scripts on real data in RStudio, pastes output -> dr-05 writes final results
+current_stage: "D4"
+
+stage_status:
+  A_pattern_extracted: "not_started"    # not_started / in_progress / needs_revision / complete / blocked
+  B_synthesis_code_written: "not_started"
+  C_synthetic_created: "not_started"
+  D1_analysis_plan: "not_started"
+  D2_descriptive_code: "not_started"
+  D3_main_analysis_code: "not_started"
+  D4_full_model_code: "not_started"
+  E_real_results: "not_started"
+
+artifacts:
+  dataset_pattern: null                 # pattern/dataset_pattern.csv
+  pattern_reviewed_by_user: false
+  synthesize_script: null               # scripts/synthesize_data.R
+  synthetic_dataset: null               # data_synthetic/synthetic_dataset.csv
+  analysis_plan: null                   # plans/analysis_plan.yaml
+  desc_script: null                     # scripts/desc.R
+  infer_script: null                    # scripts/infer.R (medical track)
+  sem_measurement_script: null          # scripts/sem_measurement.R (sem track)
+  sem_structural_script: null           # scripts/sem_structural.R (sem track)
+  rstudio_output_received: false
+  present_results: null                 # results_real/present_results.md
+
+next_action:
+  skill: "dr-00-privacy-gate"
+  reason: "New project: start at Stage A."
+  user_prompt: ""

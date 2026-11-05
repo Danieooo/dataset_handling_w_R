@@ -1,0 +1,49 @@
+workflow: dr
+state_version: 2
+project_name: "crp-mortality"
+workflow_track: "medical"
+research_question: "Nồng độ CRP lúc nhập viện có liên quan đến tử vong 30 ngày không, sau khi hiệu chỉnh các yếu tố nguy cơ?"
+
+# This worked example was completed before Stage D1b existed, so it has no SAP.
+analysis_mode: null
+sap_approved: false
+
+current_stage: "E"
+
+stage_status:
+  A_pattern_extracted: "complete"
+  B_synthesis_code_written: "complete"
+  C_synthetic_created: "complete"
+  D1_analysis_plan: "complete"
+  D1b_sap: "not_applicable"      # predates D1b
+  D2_descriptive_code: "complete"
+  D2b_visual_exploration: "complete"
+  D3_main_analysis_code: "complete"
+  D4_full_model_code: "complete"
+  E_real_results: "complete"
+
+artifacts:
+  dataset_pattern: null
+  pattern_reviewed_by_user: true
+  synthesize_script: null
+  synthetic_dataset: "data_synthetic/synthetic_dataset.csv"
+  analysis_plan: "plans/analysis_plan.yaml"
+  desc_script: "scripts/desc.R"
+  plots_script: "scripts/plots.R"
+  infer_script: "scripts/infer.R"
+  sem_measurement_script: null
+  sem_structural_script: null
+  rstudio_output_received: true
+  present_results: "results_real/present_results.md"
+
+verified_by:
+  desc_script: "agent"           # Rscript, exit 0, synthetic
+  plots_script: "agent"          # Rscript, exit 0, figures visually checked
+  infer_script: "agent"          # Rscript, exit 0, synthetic
+  sem_measurement_script: null
+  sem_structural_script: null
+
+next_action:
+  skill: "none"
+  reason: "All stages A through E are complete. Workflow finished."
+  user_prompt: ""
